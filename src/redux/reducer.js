@@ -1,4 +1,4 @@
-import { SET_GEO_DATA, SET_WEATHER_DATA } from "./actionsTypes";
+import { SET_CITY, SET_GEO_DATA, SET_WEATHER_DATA } from "./actionsTypes";
 
 const initState = {
     geo: {},
@@ -12,6 +12,8 @@ const reducer = (state = initState, action) => {
             return { ...state, geo: { ...action.payload } }
         case SET_WEATHER_DATA:
             return { ...state, weatherData: { ...action.payload } }
+        case SET_CITY:
+            return { ...state, city: action.payload }
     }
 
     return state

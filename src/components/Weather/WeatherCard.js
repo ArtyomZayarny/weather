@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types';
+import { Card } from 'semantic-ui-react'
+import { Loader } from 'semantic-ui-react'
+import { useSelector } from 'react-redux'
 
 Weathercard.propTypes = {
     temp: PropTypes.number.isRequired,
@@ -22,17 +25,21 @@ Weathercard.defaultProps = {
 }
 
 export default function Weathercard({ city, temp, min, max, pressure, humidity }) {
-
+    const weatherData = useSelector(state => state.weatherData);
 
     return (
-        <>
-            <h3>Weather Card</h3>
-            <h2>City: {city}</h2>
-            <p>temp: {temp} °C</p>
-            <p>min: {min}</p>
-            <p>max: {max}</p>
-            <p>pressure: {pressure}</p>
-            <p>humidity: {humidity}</p>
-        </>
+        <Card style={{ 'height': 290, 'position': 'relative' }}>
+            {Object.keys(weatherData).length > 0 ?
+                <>
+                    <Card.Content header={city} />
+                    <Card.Content description={`temp: ${temp} °C`} />
+                    <Card.Content description={`min: ${min} °C`} />
+                    <Card.Content description={`max: ${max} °C`} />
+                    <Card.Content description={`pressure: ${pressure} hPa`} />
+                    <Card.Content description={`humidity: ${humidity} %`} />
+                </>
+                :
+                <Loader active style={{ 'display': 'flex', 'justifyContent': 'center', 'alignItems': 'center' }} />}
+        </Card>
     )
 }
