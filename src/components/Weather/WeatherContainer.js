@@ -20,6 +20,7 @@ export function WeatherContainer(props) {
         if (Object.keys(geoData).length === 0) {
             setGeo()
         }
+
         //Geo data was recived
         if (Object.keys(geoData).length > 0) {
             const { lat, lon } = geoData;
@@ -53,8 +54,6 @@ export function WeatherContainer(props) {
         const result = Object.assign(data.main, { city })
         return result
     }
-
-
 
     const setGeo = async () => {
         setLoading(true);
